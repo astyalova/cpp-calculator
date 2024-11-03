@@ -3,8 +3,6 @@
 #include <string>
 #include "calculator.h"
 
-using Number = double;
-
 bool ReadNumber(Number& result) {
     std::cin >> result;
 
@@ -19,7 +17,7 @@ bool RunCalculatorCycle() {
     Number start_number = 0;
     
     if (!ReadNumber(start_number)) {
-    return false;
+        return false;
     }
     
     std::string input;
@@ -74,7 +72,7 @@ bool RunCalculatorCycle() {
             if(!ReadNumber(number)) {
                 break;
             } else {
-                    start_number = pow(start_number, number);
+                start_number = pow(start_number, number);
             }
         } else if(input == "*") {
             if(!ReadNumber(number)) {
