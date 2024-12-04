@@ -28,3 +28,18 @@ void Calculator::Pow(Number n) {
     result_ = pow(result_, n);
 }
 
+void Calculator::Save() {
+    remember_number_ = result_;
+    is_save_ = true;
+}
+
+void Calculator::Load() {
+    result_ = remember_number_;
+}
+
+bool Calculator::HasMem() const {
+    if(is_save_) {
+        return true;
+    }
+    return false;
+}

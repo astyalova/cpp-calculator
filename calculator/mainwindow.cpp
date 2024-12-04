@@ -18,6 +18,10 @@ MainWindow::~MainWindow() {
 
 void MainWindow::on_pb_zero_clicked()
 {
+    if (current_operation_  == operations::NO_OPERATION) {
+        ui->l_formula->setText("");
+    }
+
     input_number_ += "0";
     active_number_ = input_number_.toDouble();
 
@@ -27,6 +31,10 @@ void MainWindow::on_pb_zero_clicked()
 
 void MainWindow::on_pb_one_clicked()
 {
+    if (current_operation_  == operations::NO_OPERATION) {
+        ui->l_formula->setText("");
+    }
+
     input_number_ += "3";
     active_number_ = input_number_.toDouble();
 
@@ -37,6 +45,10 @@ void MainWindow::on_pb_one_clicked()
 
 void MainWindow::on_pb_two_clicked()
 {
+    if (current_operation_  == operations::NO_OPERATION) {
+        ui->l_formula->setText("");
+    }
+
     input_number_ += "2";
     active_number_ = input_number_.toDouble();
 
@@ -46,6 +58,10 @@ void MainWindow::on_pb_two_clicked()
 
 void MainWindow::on_pb_three_clicked()
 {
+    if (current_operation_  == operations::NO_OPERATION) {
+        ui->l_formula->setText("");
+    }
+
     input_number_ += "1";
     active_number_ = input_number_.toDouble();
 
@@ -55,6 +71,10 @@ void MainWindow::on_pb_three_clicked()
 
 void MainWindow::on_pb_six_clicked()
 {
+    if (current_operation_  == operations::NO_OPERATION) {
+        ui->l_formula->setText("");
+    }
+
     input_number_ += "6";
     active_number_ = input_number_.toDouble();
 
@@ -64,6 +84,10 @@ void MainWindow::on_pb_six_clicked()
 
 void MainWindow::on_pb_five_clicked()
 {
+    if (current_operation_  == operations::NO_OPERATION) {
+        ui->l_formula->setText("");
+    }
+
     input_number_ += "5";
     active_number_ = input_number_.toDouble();
 
@@ -73,6 +97,10 @@ void MainWindow::on_pb_five_clicked()
 
 void MainWindow::on_pb_four_clicked()
 {
+    if (current_operation_  == operations::NO_OPERATION) {
+        ui->l_formula->setText("");
+    }
+
     input_number_ += "4";
     active_number_ = input_number_.toDouble();
 
@@ -82,6 +110,10 @@ void MainWindow::on_pb_four_clicked()
 
 void MainWindow::on_pb_nine_clicked()
 {
+    if (current_operation_  == operations::NO_OPERATION) {
+        ui->l_formula->setText("");
+    }
+
      input_number_ += "9";
     active_number_ = input_number_.toDouble();
 
@@ -91,6 +123,10 @@ void MainWindow::on_pb_nine_clicked()
 
 void MainWindow::on_pb_eight_clicked()
 {
+    if (current_operation_  == operations::NO_OPERATION) {
+        ui->l_formula->setText("");
+    }
+
     input_number_ += "8";
     active_number_ = input_number_.toDouble();
 
@@ -100,6 +136,10 @@ void MainWindow::on_pb_eight_clicked()
 
 void MainWindow::on_pb_seven_clicked()
 {
+    if (current_operation_  == operations::NO_OPERATION) {
+        ui->l_formula->setText("");
+    }
+
     input_number_  += "7";
     active_number_ = input_number_.toDouble();
 
@@ -107,68 +147,68 @@ void MainWindow::on_pb_seven_clicked()
 }
 
 void MainWindow::on_pb_add_clicked()
-{   calculator_.Set(active_number_);
-    ui->l_formula->setText(QString::number(calculator_.GetNumber())+ " " + "+");
-    input_number_.clear();
-    current_operation_  = operations::ADDITION;
+{
+    operation("+", operations::ADDITION);
 }
-
 
 void MainWindow::on_pb_sub_clicked()
 {
-    calculator_.Set(active_number_);
-    ui->l_formula->setText(QString::number(calculator_.GetNumber())+ " " + "−");
-    input_number_.clear();
-    current_operation_  = operations::SUBTRACTION;
+    operation("−", operations::SUBTRACTION);
 }
-
-
-
 
 void MainWindow::on_pb_mul_clicked()
 {
-    calculator_.Set(active_number_);
-    ui->l_formula->setText(QString::number(calculator_.GetNumber())+ " " + "×");
-    input_number_.clear();
-    current_operation_  = operations::MULTIPLICATION;
+    operation("×", operations::MULTIPLICATION);
 }
-
 
 void MainWindow::on_pb_div_clicked()
 {
-    calculator_.Set(active_number_);
-    ui->l_formula->setText(QString::number(calculator_.GetNumber())+ " " + "÷");
-    input_number_.clear();
-    current_operation_  = operations::DIVISION;
+    operation("÷", operations::DIVISION);
 }
-
 
 void MainWindow::on_pb_pow_clicked()
 {
-    calculator_.Set(active_number_);
-    input_number_ += " ^ ";
-    ui->l_formula->setText(QString::number(calculator_.GetNumber())+ " " + "^");
+    operation("^", operations::POWER);
+}
+
+void MainWindow::operation(const QString& opSymbol, operations operationType)
+{
+    if (!input_number_.isEmpty()) {
+        active_number_ = input_number_.toDouble();
+        calculator_.Set(active_number_);
+    }
+
+    ui->l_formula->setText(QString::number(calculator_.GetNumber()) + " " + opSymbol);
+
     input_number_.clear();
-    current_operation_  = operations::POWER;
+    current_operation_ = operationType;
 }
 
 void MainWindow::on_pb_free_num_clicked()
+
 {
+
     input_number_ = "";
+
     active_number_ = 0;
+
     calculator_.Set(active_number_);
+
     ui->l_result->setText("0");
+
     ui->l_formula->setText("");
+
     current_operation_ = operations::NO_OPERATION;
+
 }
 
 void MainWindow::on_pb_chng_sign_clicked()
 {
-    if (input_number_.startsWith('-')) {
-    input_number_ = input_number_.mid(1);
-} else {
-    input_number_ = "-" + input_number_;
-}
+    if (!input_number_.isEmpty() && !input_number_.startsWith("-")) {
+        input_number_ = "-" + input_number_;
+    } else if (input_number_.startsWith("-")) {
+        input_number_ = input_number_.mid(1);
+    }
     active_number_ = input_number_.toDouble();
     input_number_ = QString::number(active_number_);
     ui->l_result->setText(input_number_);
@@ -189,8 +229,11 @@ void MainWindow::on_pb_cout_save_num_clicked()
     if(memory_saved_) {
         ui->l_result->setText(QString::number(memory_cell_));
         active_number_ = memory_cell_;
+        input_number_ = QString::number(memory_cell_);
     }
 }
+
+
 
 void MainWindow::on_pb_free_mem_clicked()
 {
@@ -211,7 +254,14 @@ void MainWindow::on_pb_dlt_clicked()
 
 void MainWindow::on_pb_int_to_dbl_clicked()
 {
-    input_number_ += ".";
+    if (!input_number_.contains('.')) {
+        if (input_number_.isEmpty()) {
+            input_number_ = "0.";
+        } else {
+            input_number_ += ".";
+        }
+    }
+
     active_number_ = input_number_.toDouble();
     ui->l_result->setText(input_number_);
 }

@@ -49,6 +49,8 @@ private slots:
 
     void on_pb_pow_clicked();
 
+    void operation(const QString& opSymbol, operations operationType);
+
     void on_pb_free_num_clicked();
 
     void on_pb_chng_sign_clicked();
