@@ -173,9 +173,11 @@ void MainWindow::on_pb_pow_clicked()
 
 void MainWindow::operation(const QString& opSymbol, operations operationType)
 {
-    if (!input_number_.isEmpty()) {
-        active_number_ = input_number_.toDouble();
-        calculator_.Set(active_number_);
+    if (current_operation_ == operations::NO_OPERATION) {
+        if (!input_number_.isEmpty()) {
+            active_number_ = input_number_.toDouble();
+            calculator_.Set(active_number_);
+        }
     }
 
     ui->l_formula->setText(QString::number(calculator_.GetNumber()) + " " + opSymbol);
@@ -204,16 +206,23 @@ void MainWindow::on_pb_free_num_clicked()
 
 void MainWindow::on_pb_chng_sign_clicked()
 {
-    if (!input_number_.isEmpty() && !input_number_.startsWith("-")) {
-        input_number_ = "-" + input_number_;
-    } else if (input_number_.startsWith("-")) {
-        input_number_ = input_number_.mid(1);
-    }
-    active_number_ = input_number_.toDouble();
-    input_number_ = QString::number(active_number_);
-    ui->l_result->setText(input_number_);
+    if (!input_number_.isEmpty()) {
+        if (!input_number_.startsWith("-")) {
+            input_number_ = "-" + input_number_;
+        } else {
+            input_number_ = input_number_.mid(1);
+        }
 
+        ui->l_result->setText(input_number_);
+    } else {
+        active_number_ = -active_number_;
+        calculator_.Set(active_number_);
+
+        ui->l_result->setText(QString::number(active_number_));
+    }
 }
+
+
 
 void MainWindow::on_pb_mem_save_clicked()
 {
