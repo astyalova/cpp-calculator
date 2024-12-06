@@ -206,6 +206,10 @@ void MainWindow::on_pb_free_num_clicked()
 
 void MainWindow::on_pb_chng_sign_clicked()
 {
+    if ((current_operation_ == operations::NO_OPERATION && input_number_.isEmpty()) || memory_saved_ == true) {
+        return;
+    }
+
     if (!input_number_.isEmpty()) {
         if (!input_number_.startsWith("-")) {
             input_number_ = "-" + input_number_;
