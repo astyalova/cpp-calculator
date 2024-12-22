@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
@@ -29,7 +30,7 @@ public:
     QPushButton *pb_sub;
     QPushButton *pb_free_mem;
     QPushButton *pb_zero;
-    QPushButton *pb_one;
+    QPushButton *pb_three;
     QPushButton *pb_mul;
     QPushButton *pb_pow;
     QPushButton *pb_eight;
@@ -37,14 +38,14 @@ public:
     QPushButton *pb_free_num;
     QPushButton *pb_add;
     QLabel *l_formula;
-    QPushButton *pb_three;
+    QPushButton *pb_one;
     QPushButton *pb_mem_save;
     QHBoxLayout *horizontalLayout;
     QLabel *l_memory;
     QLabel *l_result;
     QPushButton *pb_five;
     QPushButton *pb_cout_save_num;
-    QPushButton *pb_int_to_dbl;
+    QPushButton *tb_extra;
     QPushButton *pb_two;
     QPushButton *pb_seven;
     QPushButton *pb_dlt;
@@ -53,6 +54,7 @@ public:
     QPushButton *pb_div;
     QPushButton *pb_four;
     QPushButton *pb_chng_sign;
+    QComboBox *cmb_controller;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -88,10 +90,10 @@ public:
 
         gridLayout->addWidget(pb_zero, 7, 1, 1, 1);
 
-        pb_one = new QPushButton(centralwidget);
-        pb_one->setObjectName("pb_one");
+        pb_three = new QPushButton(centralwidget);
+        pb_three->setObjectName("pb_three");
 
-        gridLayout->addWidget(pb_one, 6, 2, 1, 1);
+        gridLayout->addWidget(pb_three, 6, 2, 1, 1);
 
         pb_mul = new QPushButton(centralwidget);
         pb_mul->setObjectName("pb_mul");
@@ -129,10 +131,10 @@ public:
 
         gridLayout->addWidget(l_formula, 0, 3, 1, 1);
 
-        pb_three = new QPushButton(centralwidget);
-        pb_three->setObjectName("pb_three");
+        pb_one = new QPushButton(centralwidget);
+        pb_one->setObjectName("pb_one");
 
-        gridLayout->addWidget(pb_three, 6, 0, 1, 1);
+        gridLayout->addWidget(pb_one, 6, 0, 1, 1);
 
         pb_mem_save = new QPushButton(centralwidget);
         pb_mem_save->setObjectName("pb_mem_save");
@@ -170,10 +172,10 @@ public:
 
         gridLayout->addWidget(pb_cout_save_num, 2, 1, 1, 1);
 
-        pb_int_to_dbl = new QPushButton(centralwidget);
-        pb_int_to_dbl->setObjectName("pb_int_to_dbl");
+        tb_extra = new QPushButton(centralwidget);
+        tb_extra->setObjectName("tb_extra");
 
-        gridLayout->addWidget(pb_int_to_dbl, 7, 0, 1, 1);
+        gridLayout->addWidget(tb_extra, 7, 0, 1, 1);
 
         pb_two = new QPushButton(centralwidget);
         pb_two->setObjectName("pb_two");
@@ -215,6 +217,18 @@ public:
 
         gridLayout->addWidget(pb_chng_sign, 3, 2, 1, 1);
 
+        cmb_controller = new QComboBox(centralwidget);
+        cmb_controller->addItem(QString());
+        cmb_controller->addItem(QString());
+        cmb_controller->addItem(QString());
+        cmb_controller->addItem(QString());
+        cmb_controller->addItem(QString());
+        cmb_controller->addItem(QString());
+        cmb_controller->addItem(QString());
+        cmb_controller->setObjectName("cmb_controller");
+
+        gridLayout->addWidget(cmb_controller, 0, 0, 1, 1);
+
 
         gridLayout_2->addLayout(gridLayout, 0, 0, 1, 1);
 
@@ -231,7 +245,7 @@ public:
         pb_sub->setText(QCoreApplication::translate("MainWindow", "\342\210\222", nullptr));
         pb_free_mem->setText(QCoreApplication::translate("MainWindow", "MC", nullptr));
         pb_zero->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        pb_one->setText(QCoreApplication::translate("MainWindow", "3", nullptr));
+        pb_three->setText(QCoreApplication::translate("MainWindow", "3", nullptr));
         pb_mul->setText(QCoreApplication::translate("MainWindow", "\303\227", nullptr));
         pb_pow->setText(QCoreApplication::translate("MainWindow", "x\312\270", nullptr));
         pb_eight->setText(QCoreApplication::translate("MainWindow", "8", nullptr));
@@ -239,13 +253,13 @@ public:
         pb_free_num->setText(QCoreApplication::translate("MainWindow", "C", nullptr));
         pb_add->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
         l_formula->setText(QString());
-        pb_three->setText(QCoreApplication::translate("MainWindow", "1", nullptr));
+        pb_one->setText(QCoreApplication::translate("MainWindow", "1", nullptr));
         pb_mem_save->setText(QCoreApplication::translate("MainWindow", "MS", nullptr));
         l_memory->setText(QString());
         l_result->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"right\"><br/></p></body></html>", nullptr));
         pb_five->setText(QCoreApplication::translate("MainWindow", "5", nullptr));
         pb_cout_save_num->setText(QCoreApplication::translate("MainWindow", "MR", nullptr));
-        pb_int_to_dbl->setText(QCoreApplication::translate("MainWindow", ".", nullptr));
+        tb_extra->setText(QCoreApplication::translate("MainWindow", ".", nullptr));
         pb_two->setText(QCoreApplication::translate("MainWindow", "2", nullptr));
         pb_seven->setText(QCoreApplication::translate("MainWindow", "7", nullptr));
         pb_dlt->setText(QCoreApplication::translate("MainWindow", "\342\214\253", nullptr));
@@ -254,6 +268,14 @@ public:
         pb_div->setText(QCoreApplication::translate("MainWindow", "\303\267", nullptr));
         pb_four->setText(QCoreApplication::translate("MainWindow", "4", nullptr));
         pb_chng_sign->setText(QCoreApplication::translate("MainWindow", "\302\261", nullptr));
+        cmb_controller->setItemText(0, QCoreApplication::translate("MainWindow", "double", nullptr));
+        cmb_controller->setItemText(1, QCoreApplication::translate("MainWindow", "float", nullptr));
+        cmb_controller->setItemText(2, QCoreApplication::translate("MainWindow", "uint8_t", nullptr));
+        cmb_controller->setItemText(3, QCoreApplication::translate("MainWindow", "int", nullptr));
+        cmb_controller->setItemText(4, QCoreApplication::translate("MainWindow", "int64_t", nullptr));
+        cmb_controller->setItemText(5, QCoreApplication::translate("MainWindow", "size_t", nullptr));
+        cmb_controller->setItemText(6, QCoreApplication::translate("MainWindow", "Rational", nullptr));
+
     } // retranslateUi
 
 };
