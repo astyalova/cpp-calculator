@@ -54,29 +54,25 @@ public:
     }
 
     Rational& operator +=(const Rational& r) {
-        numerator_ = numerator_* r.denominator_ + r.numerator_*denominator_;
-        denominator_ *= r.denominator_;
+        *this = *this + r;
         Reduction();
         return *this;
     }
 
     Rational& operator -=(const Rational& r) {
-        numerator_ = numerator_* r.denominator_ - r.numerator_*denominator_;
-        denominator_ *= r.denominator_;
+        *this = *this - r;
         Reduction();
         return *this;
     }
 
     Rational& operator *=(const Rational& r) {
-        numerator_ = numerator_ * r.numerator_;
-        denominator_ = denominator_ * r.denominator_;
+        *this = *this * r;
         Reduction();
         return *this;
     }
 
     Rational& operator /=(const Rational& r) {
-        numerator_ = numerator_ * r.denominator_;
-        denominator_ = denominator_ * r.numerator_;
+        *this = *this / r;
         Reduction();
         return *this;
     }
