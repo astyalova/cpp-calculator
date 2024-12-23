@@ -61,9 +61,23 @@ void MainWindow::onDigitButtonClicked() {
     if (digit_cb_) {
         QPushButton* senderButton = qobject_cast<QPushButton*>(sender());
         int digit = senderButton->text().toInt();
+
+        QString currentText = ui->l_result->text();
+
+        if (currentText == "0" && digit == 0) {
+            return;
+        }
+
+        if (currentText == "0" && digit != 0) {
+            ui->l_result->setText(QString::number(digit));
+        } else {
+            ui->l_result->setText(currentText + QString::number(digit));
+        }
+
         digit_cb_(digit);
     }
 }
+
 
 void MainWindow::onOperationButtonClicked() {
     if (operation_cb_) {
